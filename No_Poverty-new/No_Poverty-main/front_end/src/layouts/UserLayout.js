@@ -39,7 +39,7 @@ const UserLayout = ({ children }) => {
   return (
     <>
       <Header_bar />
-      <Layout>
+      {/* <Layout>
         <Sider
           collapsible
           collapsed={collapsed}
@@ -58,7 +58,7 @@ const UserLayout = ({ children }) => {
             NoPoverty System ©2023
           </Footer>
         </Layout>
-      </Layout>
+      </Layout> */}
     </>
   );
 };

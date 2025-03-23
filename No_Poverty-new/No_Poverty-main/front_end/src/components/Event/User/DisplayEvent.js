@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Modal, Button, Input, Form } from 'antd'
 import { MapPinIcon, CalendarIcon } from 'lucide-react'
+import Navbar from '../../Navbar'
+
 const DisplayEvent = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [eventDetails, setAllEventDetails] = useState([])
@@ -38,7 +40,9 @@ const DisplayEvent = () => {
       : 'bg-red-100 text-red-800'
   }
   return (
+    
     <div className="bg-gray-50 min-h-screen py-8">
+      <Navbar/>
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Upcoming Events</h1>

@@ -23,6 +23,7 @@ const Header_bar = (props) => {
         className="site-layout-background"
         style={{ justifyContent: "space-between" }}
       >
+        
         <Row
           style={{
             width: "100%",
@@ -39,8 +40,17 @@ const Header_bar = (props) => {
             />
           </Col>
           <Col>
+          <a href="/userDash" className="text-gray-600 hover:text-purple-600 transition-colors">Home</a>
+          <a href="/adsUserView" className="text-gray-600 hover:text-purple-600 transition-colors">Donate Now</a>
+          <a href="/showDonation" className="text-gray-600 hover:text-purple-600 transition-colors">My Donation</a>
+          <a href="/showVacancies" className="text-gray-600 hover:text-purple-600 transition-colors">Job Portal</a>
+          <a href="/appliedJobs" className="text-gray-600 hover:text-purple-600 transition-colors">Applied Jobs</a>
+          <a href="/userEvent" className="text-gray-600 hover:text-purple-600 transition-colors">Events</a>
+          </Col>
+          <Col>
             <h1 style={{ color: "white" }}>HelpingHands</h1>
           </Col>
+          
           <Logout />
         </Row>
       </Header>

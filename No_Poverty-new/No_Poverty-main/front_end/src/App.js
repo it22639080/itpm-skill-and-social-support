@@ -96,9 +96,9 @@ function App() {
       <Route
         path="/jobApply/:id"
         element={
-          <UserLayout>
+          // <UserLayout>
             <JobApply />
-          </UserLayout>
+          // </UserLayout>
         }
       />
       <Route
@@ -178,9 +178,9 @@ function App() {
       <Route
         path="/userEvent"
         element={
-          <UserLayout>
+          // <UserLayout>
             <DisplayEvent />
-          </UserLayout>
+          // </UserLayout>
         }
       />
       <Route path="/AllParticipants/:id" element={<AllParticipants />} />
