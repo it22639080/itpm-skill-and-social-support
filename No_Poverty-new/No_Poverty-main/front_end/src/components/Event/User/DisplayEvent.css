@@ -1,0 +1,107 @@
+/* Event-Main.css */
+
+/* General Page Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Page Title Styling */
+  .page-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Event Card Styling */
+  .ant-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background: white;
+  }
+  
+  .ant-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .ant-card-head-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5DBB63;
+  }
+  
+  .ant-card-body {
+    padding: 15px;
+  }
+  
+  /* Location & Date Cards */
+  .event-location, .event-date {
+    background: #f0f2f5;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Event Description */
+  .event-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* Read More Icon */
+  .read-icon {
+    color: #5DBB63;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .read-icon:hover {
+    color: #2e7d32;
+  }
+  
+  /* Modal Styling */
+  .ant-modal {
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .ant-modal-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Form Inputs */
+  .ant-form-item-label > label {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .ant-input {
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  /* Participate Button */
+  .participate-button {
+    background-color: #5DBB63 !important;
+    color: white !important;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .participate-button:hover {
+    background-color: #2e7d32 !important;
+  }
+  
