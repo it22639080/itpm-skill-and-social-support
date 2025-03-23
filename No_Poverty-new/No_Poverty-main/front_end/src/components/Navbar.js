@@ -7,10 +7,13 @@ const Navbar = () => {
           <span className="text-xl font-bold text-gray-800">CharityHope</span>
         </div>
         <nav className="hidden md:flex space-x-8">
-          <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">Home</a>
-          <a href="/userEvent" className="text-gray-600 hover:text-purple-600 transition-colors">About</a>
-          <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">Projects</a>
-          <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">Contact</a>
+          <a href="/userDash" className="text-gray-600 hover:text-purple-600 transition-colors">Home</a>
+          <a href="/adsUserView" className="text-gray-600 hover:text-purple-600 transition-colors">Donate Now</a>
+          <a href="/showDonation" className="text-gray-600 hover:text-purple-600 transition-colors">My Donation</a>
+          <a href="/showVacancies" className="text-gray-600 hover:text-purple-600 transition-colors">Job Portal</a>
+          <a href="/appliedJobs" className="text-gray-600 hover:text-purple-600 transition-colors">Applied Jobs</a>
+          <a href="/userEvent" className="text-gray-600 hover:text-purple-600 transition-colors">Events</a>
+
         </nav>
         <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
           Donate Now

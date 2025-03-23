@@ -1,101 +1,186 @@
-import axios from "axios";
-import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { Badge, Button, Card, Collapse, Input, Modal, Space, Typography } from "antd";
-import { ExclamationCircleFilled } from "@ant-design/icons";
-
-const { Search } = Input;
-const { Panel } = Collapse;
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { Badge, Button, Card, Collapse, Input, Modal, Typography } from 'antd'
+import { ExclamationCircleFilled } from '@ant-design/icons'
+import {
+  PlusIcon,
+  SearchIcon,
+  PrinterIcon,
+  PencilIcon,
+  TrashIcon,
+  UsersIcon,
+} from 'lucide-react'
+const { Search } = Input
+const { Panel } = Collapse
 const AllEvent = () => {
-    const [eventDetails, setAllEventDetails] = useState([]);
-    const [searchDetail, setsearchDetail] = useState("");
-    const [eventId, setEventId] = useState("");
-    const [count, setcount] = useState(0);
-    const { confirm } = Modal;
-
-    useEffect(() => {
-        axios.get("http://localhost:4000/event/getAll")
-            .then((res) => setAllEventDetails(res.data.Event))
-            .catch(() => alert("Check The Connectivity"));
-    }, []);
-
-    function deleteEventDetail(id) {
-        axios.delete(`http://localhost:4000/event/delete/${id}`)
-            .then(() => window.location.reload(false))
-            .catch(() => alert("Error Occurred On Delete"));
-    }
-
-    const showPromiseConfirm = (val) => {
-        confirm({
-            title: "Do you want to delete this event?",
-            icon: <ExclamationCircleFilled />,
-            content: "Once deleted, this event cannot be restored.",
-            async onOk() {
-                try {
-                    await deleteEventDetail(val._id);
-                } catch {
-                    console.log("Oops, an error occurred!");
-                }
-            },
-        });
-    };
-
-    const handleEventSelect = (eventId) => {
-        setEventId(eventId);
-        setcount(0);
-        axios
-            .get(`http://localhost:4000/event/${eventId}/registered-entities-count`)
-            .then((res) => setcount(res.data))
-            .catch(() => alert("Something went wrong while fetching count"));
-    };
-
-    const showCount = (eid, cid) => (eid === cid ? count.count : 0);
-
-    return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#f5f5f5', padding: '10px' }}>
-            <div style={{ width: '90%', background: '#fff', padding: '15px', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0,0,0,0.1)' }}>
-                <h1 style={{ textAlign: 'center', color: '#333', fontSize: '24px', fontWeight: 'bold', marginBottom: '15px' }}>Event Main</h1>
-                <section style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                    <Link to={'/addevent'}>
-                        <Button style={{ backgroundColor: '#007BFF', color: 'white', borderRadius: '6px' }}>Add Event</Button>
-                    </Link>
-                    <Search placeholder="Search events" allowClear enterButton="Search" size="middle" onSearch={setsearchDetail} style={{ width: '35%' }} />
-                </section>
-                {eventDetails.filter(val => searchDetail === "" || val.eventName.toLowerCase().includes(searchDetail.toLowerCase()))
-                    .map((eventDetailsVal, index) => (
-                        <Collapse key={index} accordion>
-                            <Panel header={<Badge count={eventDetailsVal.eventNo} style={{ backgroundColor: '#FF5722' }}/>} extra={<Badge count={eventDetailsVal.eventDate} style={{ backgroundColor: '#673AB7' }}/>}>
-                                <Card title={eventDetailsVal.eventName} extra={
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Link to={`/updateEvent/${eventDetailsVal._id}`}>
-                                            <Button style={{ backgroundColor: '#FFA500', color: 'white' }}>Edit</Button>
-                                        </Link>
-                                        <Link to={`/printDetails/${eventDetailsVal._id}`}>
-                                            <Button style={{ backgroundColor: '#00BCD4', color: 'white' }}>Print</Button>
-                                        </Link>
-                                        <Button style={{ backgroundColor: '#F44336', color: 'white' }} onClick={() => showPromiseConfirm(eventDetailsVal)}>Delete</Button>
-                                    </div>
-                                }>
-                                    <Typography style={{ display: 'flex', justifyContent: 'space-between', marginBottom: "10px" }}>
-                                        <Button style={{ backgroundColor: "#dbe0ed", width: "20%", padding: '10px', textAlign: 'center', borderRadius: '4px' }} onClick={() => handleEventSelect(eventDetailsVal._id)}>
-                                            Participants
-                                        </Button>
-                                        <Link to={`/AllParticipants/${eventDetailsVal._id}`}>
-                                            <Button style={{ backgroundColor: "#dbe0ed", width: "20%", padding: '10px', textAlign: 'center', borderRadius: '4px' }}>
-                                                {showCount(eventDetailsVal._id, count.id)}
-                                            </Button>
-                                        </Link>
-                                    </Typography>
-                                    <Card title="Location" style={{ marginTop: '15px' }}>{eventDetailsVal.eventPlace}</Card>
-                                    <Card title="Description" style={{ marginTop: '10px' }}>{eventDetailsVal.eventDetails}</Card>
-                                </Card>
-                            </Panel>
-                        </Collapse>
-                    ))}
-            </div>
+  const [eventDetails, setAllEventDetails] = useState([])
+  const [searchDetail, setsearchDetail] = useState('')
+  const [eventId, setEventId] = useState('')
+  const [count, setcount] = useState(0)
+  const { confirm } = Modal
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/event/getAll')
+      .then((res) => setAllEventDetails(res.data.Event))
+      .catch(() => alert('Check The Connectivity'))
+  }, [])
+  function deleteEventDetail(id) {
+    axios
+      .delete(`http://localhost:4000/event/delete/${id}`)
+      .then(() => window.location.reload(false))
+      .catch(() => alert('Error Occurred On Delete'))
+  }
+  const showPromiseConfirm = (val) => {
+    confirm({
+      title: 'Do you want to delete this event?',
+      icon: <ExclamationCircleFilled />,
+      content: 'Once deleted, this event cannot be restored.',
+      async onOk() {
+        try {
+          await deleteEventDetail(val._id)
+        } catch {
+          console.log('Oops, an error occurred!')
+        }
+      },
+    })
+  }
+  const handleEventSelect = (eventId) => {
+    setEventId(eventId)
+    setcount(0)
+    axios
+      .get(`http://localhost:4000/event/${eventId}/registered-entities-count`)
+      .then((res) => setcount(res.data))
+      .catch(() => alert('Something went wrong while fetching count'))
+  }
+  const showCount = (eid, cid) => (eid === cid ? count.count : 0)
+  return (
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-6">
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
+          Event Management
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+          <Link to="/addevent">
+            <Button
+              type="primary"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-colors"
+              icon={<PlusIcon className="w-4 h-4" />}
+            >
+              Add Event
+            </Button>
+          </Link>
+          <Search
+            placeholder="Search events"
+            allowClear
+            enterButton={
+              <div className="flex items-center gap-2">
+                <SearchIcon className="w-4 h-4" />
+                Search
+              </div>
+            }
+            size="large"
+            onSearch={setsearchDetail}
+            className="w-full md:w-96"
+          />
         </div>
-    );
-};
-
-export default AllEvent;
+        <div className="space-y-4">
+          {eventDetails
+            .filter(
+              (val) =>
+                searchDetail === '' ||
+                val.eventName
+                  .toLowerCase()
+                  .includes(searchDetail.toLowerCase()),
+            )
+            .map((eventDetailsVal, index) => (
+              <Collapse
+                key={index}
+                className="border border-gray-200 rounded-lg overflow-hidden"
+              >
+                <Panel
+                  header={
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        count={eventDetailsVal.eventNo}
+                        className="bg-orange-500"
+                      />
+                      <span className="font-medium text-gray-700">
+                        {eventDetailsVal.eventName}
+                      </span>
+                    </div>
+                  }
+                  extra={
+                    <Badge
+                      count={eventDetailsVal.eventDate}
+                      className="bg-purple-600"
+                    />
+                  }
+                >
+                  <Card className="border-none shadow-none">
+                    <div className="flex flex-wrap gap-3 justify-end mb-4">
+                      <Link to={`/updateEvent/${eventDetailsVal._id}`}>
+                        <Button
+                          className="flex items-center gap-2 bg-amber-500 text-white hover:bg-amber-600"
+                          icon={<PencilIcon className="w-4 h-4" />}
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                      <Link to={`/printDetails/${eventDetailsVal._id}`}>
+                        <Button
+                          className="flex items-center gap-2 bg-cyan-500 text-white hover:bg-cyan-600"
+                          icon={<PrinterIcon className="w-4 h-4" />}
+                        >
+                          Print
+                        </Button>
+                      </Link>
+                      <Button
+                        className="flex items-center gap-2 bg-red-500 text-white hover:bg-red-600"
+                        onClick={() => showPromiseConfirm(eventDetailsVal)}
+                        icon={<TrashIcon className="w-4 h-4" />}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                    <div className="flex flex-col md:flex-row gap-4 mb-4">
+                      <Button
+                        className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200"
+                        onClick={() => handleEventSelect(eventDetailsVal._id)}
+                      >
+                        <UsersIcon className="w-4 h-4" />
+                        Participants
+                      </Button>
+                      <Link
+                        to={`/AllParticipants/${eventDetailsVal._id}`}
+                        className="flex-1"
+                      >
+                        <Button className="w-full bg-gray-100 hover:bg-gray-200">
+                          {showCount(eventDetailsVal._id, count.id)}
+                        </Button>
+                      </Link>
+                    </div>
+                    <div className="space-y-4">
+                      <Card
+                        className="bg-gray-50"
+                        title={<span className="text-gray-700">Location</span>}
+                      >
+                        {eventDetailsVal.eventPlace}
+                      </Card>
+                      <Card
+                        className="bg-gray-50"
+                        title={<span className="text-gray-700">Description</span>}
+                      >
+                        {eventDetailsVal.eventDetails}
+                      </Card>
+                    </div>
+                  </Card>
+                </Panel>
+              </Collapse>
+            ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+export default AllEvent
